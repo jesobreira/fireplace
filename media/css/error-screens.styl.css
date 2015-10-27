@@ -1,0 +1,49 @@
+.error-overlaid {
+  overflow: hidden;
+}
+.error-overlaid #error-overlay {
+  background: #e7e7e7;
+  bottom: 0;
+  display: block;
+  left: 0;
+  overflow: auto;
+  padding: 20px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  z-index: 102;
+}
+.error-overlaid .error-message {
+  margin: 0 auto 20px;
+  max-width: 450px;
+  position: relative;
+  top: 45%;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+.error-overlaid .error-message button {
+  display: inline-block;
+  margin-top: 1em;
+  width: 100%;
+}
+.error-overlaid .error-message h1 {
+  border-bottom: 1px solid #ccc;
+  margin: 1em 0 1em;
+  padding: 0 0 5px;
+}
+.error-overlaid .error-message p {
+  line-height: 1.5em;
+  margin: 1em 0;
+}
+@media (min-width: 1050px) {
+  .error-overlaid .error-message {
+    top: 25%;
+  }
+  .error-overlaid .error-message button {
+    float: right;
+    width: auto;
+  }
+}

@@ -1,0 +1,243 @@
+@import 'lib';
+
+$arrow-btn-size = 30px;
+$btn-color = $action-positive;
+// Install button width.
+$btn-install-width = 90px;
+// Install button font-size.
+$btn-install-font-size = 12px;
+
+.button {
+    border: 0;
+    btn_color($action-positive, $action-positive-tapped,
+              $action-positive-hover, false);
+    color: $white;
+    display: inline-block;
+    ellipsis();
+    font: 400 $btn-font-size/$medium $primary-font-family;
+    height: $btn-medium;
+    line-height: 1;
+    padding: 0 $btn-h-padding;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+
+    &:focus, &:hover, &:active {
+        text-decoration: none;
+    }
+    &.action {
+        btn_color($action-success, $action-success-tapped,
+                  $action-success-hover, false);
+    }
+    &.cancel {
+        btn_color($action-error, $action-error-tapped, $action-error-hover,
+                  false);
+    }
+    &[disabled],
+    &.disabled,
+    &.purchasing,
+    &.installing {
+        pointer-events: none;
+
+        &:hover {
+            cursor: default;
+        }
+    }
+    &.installed,
+    &.purchased,
+    &.incompatible {
+        pointer-events: auto;
+    }
+    &.t {
+        height: $btn-tiny;
+    }
+    &.s {
+        border-radius: 5px;
+        height: $btn-small;
+    }
+    &.l {
+        height: $btn-large;
+    }
+
+    // Waiting/Loading spinner.
+    &.loading-submit {
+        position: relative;
+
+        &:after {
+            content: "";
+            display: block;
+            spinner('absolute alt');
+            top: 8px;
+        }
+    }
+    .spin {
+        display: inline-block;
+        spinner('install');
+    }
+}
+
+a.button {
+    border-radius: 5px;
+    padding-top: 17px;
+
+    &.t {
+        padding-top: 5px;
+    }
+}
+
+.arrow-btn {
+    background: $action-positive url(../img/pretty/arrow-l.svg) no-repeat \
+                5px 50% / 15px 15px;
+    border: 1px solid $white;
+    border-radius: 50%;
+    color: transparent;
+    cursor: pointer;
+    font-size: 0;
+    height: $arrow-btn-size;
+    transition: 150ms;
+    width: $arrow-btn-size;
+
+    &:hover {
+        background-color: $action-positive-hover;
+    }
+    &:active {
+        background: $action-positive-tapped url(../img/pretty/arrow-l.svg) \
+                    no-repeat 5px 50% / 15px 15px;
+    }
+    &.arrow-btn-next {
+        background-position: 5px 50%;
+        transform: scaleX(-1);
+    }
+    &.arrow-btn-disabled {
+        background-color: $action-disabled;
+        cursor: default;
+    }
+}
+
+@media $retina {
+    .button {
+        &.loading-submit:after {
+            spinner-alt-image('retina');
+        }
+        .spin {
+            spinner-install-image('retina');
+        }
+    }
+}
+
+.mkt-app-button {
+    align-items: center;
+    btn_color(transparent, transparent, transparent, false);
+    cursor: pointer;
+    display: flex;
+    font-size: $btn-install-font-size;
+    height: $btn-tiny;
+    margin-top: 8px;
+    width: fit-content;
+
+    &.button {
+        padding: 0;
+    }
+    +rtl() {
+        left: 0;
+        right: inherit;
+    }
+    em {
+        // This em becomes the visual button.
+        btn_color($btn-color, $action-positive-tapped,
+                  $action-positive-hover, false);
+        border-radius: 5px;
+        display: inline-block;
+        ellipsis();
+        font-style: normal;
+        height: $btn-tiny;
+        line-height: $btn-tiny;
+        min-width: 90px;
+        padding: 0 $btn-h-padding;
+        position: relative;
+        vertical-align: bottom;
+        width: fit-content;
+
+        +website-detail() {
+            font-size: $btn-font-size;
+            height: $btn-medium;
+            line-height: $btn-medium;
+            width: 100%;
+        }
+        +website-detail--wide() {
+            height: $btn-large;
+            line-height: $btn-large;
+            padding: 0 40px;
+        }
+    }
+    &:hover em {
+        background: $action-positive-hover;
+    }
+    &:active em {
+        background: $action-positive-tapped;
+    }
+    &[disabled] em {
+        btn_color($greyscale-grey, $greyscale-grey, $greyscale-grey, false);
+    }
+    .spin {
+        display: none;
+    }
+    &.spinning,
+    &.purchasing {
+        bottom: 0;
+        height: $btn-tiny;
+
+        .mkt-app-button-text {
+            visibility: hidden;
+        }
+        .mkt-app-button-spinner {
+            bottom: 0;
+            display: inline-block;
+            left: 0;
+            margin: auto;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+    }
+    +detail() {
+        margin-top: 0;
+        width: fit-content;
+    }
+    +website-detail() {
+        height: $btn-medium;
+        line-height: $btn-medium;
+        width: 100%;
+    }
+    +website-detail--wide() {
+        height: $btn-large;
+        line-height: $btn-large;
+        margin: 30px auto;
+        width: fit-content;
+    }
+    +rtl() {
+        left: 0;
+        right: inherit;
+    }
+}
+
+.langpack > button.install {
+    position: static;
+}
+
+// Install button launch state.
+.mkt-app-button.launch {
+    btn_color(transparent, transparent, transparent, false);
+
+    em {
+        btn_color($action-success, $action-success-tapped,
+                  $action-success-hover, false);
+    }
+    &:hover em,
+    &:focus em {
+        background: $action-success-hover;
+    }
+    &:active em {
+        background: $action-success-tapped;
+    }
+}

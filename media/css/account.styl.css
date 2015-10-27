@@ -1,0 +1,154 @@
+/*
+    Settings page.
+    Contains a lot of rules on what to show or hide if logged in or out.
+*/
+.account-settings section.full > div {
+  padding-top: 30px;
+}
+.account-settings .hide-logged-out {
+  display: none;
+}
+.logged-in .account-settings .hide-logged-out {
+  display: block;
+}
+.logged-in .account-settings .hide-logged-in {
+  display: none;
+}
+.native-fxa .account-settings .account-settings-save .logout,
+.native-fxa .logout {
+  display: none;
+}
+.account-settings {
+  color: #1a1a1a;
+  background: #f1f1f1;
+  width: 100%;
+}
+.account-settings .account-field {
+  padding: 15px;
+}
+.account-settings .account-field > label {
+  color: #797979;
+  font-weight: 400;
+  margin-bottom: 15px;
+}
+.account-settings h3 {
+  clear: both;
+  padding: 0 10px 10px;
+  text-transform: uppercase;
+}
+.account-settings input[type=checkbox] {
+  margin-right: 5px;
+}
+.account-settings .settings-display-name {
+  width: 100%;
+}
+.account-settings [name="display_name"] {
+  height: 36px;
+  width: 100%;
+}
+.account-settings .recommendations label:last-child {
+  color: #1a1a1a;
+  display: inline;
+  line-height: 18px;
+}
+.account-settings .region {
+  display: block;
+  margin-top: -2px;
+}
+.account-settings .region span {
+  color: #1a1a1a;
+  margin: 0 0 0 8px;
+}
+[dir="rtl"] .account-settings .region span {
+  margin: 0 8px 0 0;
+}
+.account-settings .region img {
+  height: 20px;
+  vertical-align: middle;
+  width: 20px;
+}
+.account-settings .newsletter-info {
+  padding-left: 10px;
+}
+.account-settings .newsletter-info p {
+  line-height: 18px;
+  padding: 0 0 10px;
+  width: 100%;
+}
+.account-settings .only-logged-in.extras {
+  display: none;
+}
+.account-settings-save p,
+.account-settings-links div p {
+  color: #1a1a1a;
+  line-height: 22px;
+  font-size: 15px;
+  font-weight: 300;
+  margin: 30px 0 20px;
+}
+.account-settings-save .button,
+.account-settings-links div .button {
+  margin-top: 10px;
+  width: 100%;
+}
+.account-settings-save {
+  clear: both;
+}
+@media (min-width: 700px) {
+  .logged-in .account-settings .display-name {
+    display: inline-block;
+  }
+  .settings-info-container {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+       -moz-box-orient: horizontal;
+       -moz-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+  .settings-email,
+  .setings-display-name {
+    width: 33.333333333333336%;
+  }
+  .settings-display-name + div {
+    clear: both;
+  }
+  .account-settings-links div .button {
+    margin-right: 10px;
+    max-width: 300px;
+  }
+  .account-settings-save p {
+    margin: 0;
+  }
+  .account-settings-save .button {
+    margin: 0 10px;
+    width: 300px;
+  }
+  .account-settings-save,
+  .account-settings-links div {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+       -moz-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+       -moz-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}

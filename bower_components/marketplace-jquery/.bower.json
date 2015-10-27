@@ -1,0 +1,18 @@
+{
+  "name": "marketplace-jquery",
+  "version": "2.0.2",
+  "ignore": [
+    "LICENSE",
+    "README"
+  ],
+  "homepage": "https://github.com/mozilla/marketplace-jquery",
+  "_release": "2.0.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.0.2",
+    "commit": "46b646e9057938eec65a9cf832b61a059dfc7bf0"
+  },
+  "_source": "git://github.com/mozilla/marketplace-jquery.git",
+  "_target": "2.0.2",
+  "_originalSource": "marketplace-jquery"
+}

@@ -1,0 +1,76 @@
+@import 'layout';
+
+
+ellipsis() {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+no-ellipsis() {
+    overflow: initial;
+    text-overflow: initial;
+    white-space: initial;
+}
+
+hidetext() {
+    // Image replacement.
+    color: transparent;  // For IE.
+    overflow: hidden;
+    text-indent: 101%;
+    white-space: nowrap;
+}
+
+image-replacement(src, width, height) {
+    background: url(src) no-repeat 0 0;
+    background-size: width height;
+    display: inline-block;
+    height: height;
+    overflow: hidden;
+    text-indent: -999em;
+    width: width;
+}
+
+width-calc($width) {
+    width: unquote('calc(' + $width + ')');
+}
+
+ltr() {
+    [dir="ltr"] & {
+        {block}
+    }
+}
+
+rtl() {
+    [dir="rtl"] & {
+        {block}
+    }
+}
+
+detail() {
+    [data-page-type~="detail"] & {
+        {block}
+    }
+}
+
+detail--wide() {
+    +media--base-tablet() {
+        +detail() {
+            {block}
+        }
+    }
+}
+
+website-detail() {
+    [data-page-type~="website"] & {
+        {block}
+    }
+}
+
+website-detail--wide() {
+    +media--base-tablet() {
+        +website-detail() {
+            {block}
+        }
+    }
+}

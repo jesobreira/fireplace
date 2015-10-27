@@ -1,0 +1,63 @@
+/*
+    Grid layout for brands and collections. Mostly app icons.
+*/
+.icon-app-grid {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-align: center;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+     -moz-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.icon-app-grid li {
+  list-style: none;
+  height: 128px;
+  margin-top: 20px;
+  width: 50%;
+}
+.icon-app-grid__app {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+     -moz-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.icon-app-grid__app:hover {
+  text-decoration: none;
+}
+.icon-app-grid img {
+  max-width: 100%;
+}
+.icon-app-grid__name {
+  color: #1a1a1a;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 20px;
+  font-weight: 200;
+  line-height: 50px;
+  max-width: 90%;
+  text-align: center;
+  width: 100%;
+}
+.icon-app-grid__price {
+  color: #4cb1ff;
+  line-height: 0;
+  position: relative;
+}

@@ -1,0 +1,4 @@
+*.pyc
+*.swp
+bower_components
+.DS_Store

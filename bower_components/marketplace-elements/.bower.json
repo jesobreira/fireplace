@@ -1,0 +1,37 @@
+{
+  "version": "0.7.3",
+  "authors": [
+    "Mozilla",
+    "Mark Striemer"
+  ],
+  "dependencies": {
+    "document-register-element": "~0.1.6"
+  },
+  "description": "Custom HTML elements for the Firefox Marketplace",
+  "devDependencies": {
+    "marketplace-frontend": "~7.5"
+  },
+  "homepage": "https://github.com/mozilla/marketplace-elements",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "license": "MPL",
+  "main": "dist/js/marketplace-elements.js",
+  "moduleType": [
+    "amd"
+  ],
+  "name": "marketplace-elements",
+  "_release": "0.7.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.7.3",
+    "commit": "26ba26b107178b18f34680c86af23a8443695032"
+  },
+  "_source": "git://github.com/mozilla/marketplace-elements.git",
+  "_target": "0.7.3",
+  "_originalSource": "marketplace-elements"
+}

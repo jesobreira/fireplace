@@ -1,0 +1,203 @@
+/*
+App listing.
+    - One column on mobile
+    - Two columns on tablet.
+    - Three columns on desktop (two when expanded).
+*/
+.app-list-page {
+  min-height: 365px;
+  padding: 10px 0;
+}
+.app-list-page.full > div {
+  padding-top: 15px;
+}
+[data-page-type~=app-list] .spinner {
+  position: relative;
+  top: 35px;
+}
+[data-page-type~=app-list] .feed .feed-layout-list > .info {
+  margin-left: 0;
+}
+.app-list {
+  list-style: none;
+  min-height: 190px;
+}
+.app-list:after {
+  background: #fff;
+  bottom: 30px;
+  content: "";
+  display: block;
+  height: 1px;
+  left: 0;
+  max-width: 1070px;
+  position: absolute;
+  width: 100%;
+}
+.app-list.previews-expanded .app-list-app:not(.app-list-website) {
+  padding-bottom: 40px;
+}
+.paginated:after {
+  bottom: 102px;
+}
+.app-list-app {
+  border-bottom: 1px solid #f1f1f1;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+[data-page-type~="new"] .mkt-tile .rating {
+  display: none;
+}
+[data-page-type~="purchases"] .app-list-filters,
+[data-page-type~="purchases"] .compat-filter {
+  display: none;
+}
+[data-page-type~="purchases"] .app-list-filters-expand-wrapper {
+  margin-left: 0;
+}
+[data-page-type~="purchases"] section.full > div {
+  padding-top: 0;
+}
+section.langpacks > div {
+  padding-top: 0;
+}
+@media (min-width: 700px) {
+  .app-list,
+  .app-list.only-logged-in {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .app-list {
+    -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+    margin-top: 30px;
+    opacity: 0;
+    position: relative;
+  }
+  .app-list.paginated .app-list-app:last-child {
+    border-right: 0;
+  }
+  .app-list.previews-expanded .app-list-app {
+    border-right: 0;
+    padding: 20px 0 40px;
+    width: 100%;
+  }
+  [dir="rtl"] .app-list.previews-expanded .app-list-app {
+    border-right: 0;
+    padding: 20px 0 40px;
+  }
+  .app-list:after {
+    bottom: 0;
+  }
+  .app-list.show-app-list {
+    opacity: 1;
+  }
+  .paginated:after {
+    bottom: 72px;
+  }
+  .app-list-app {
+    border-bottom: 1px solid #f1f1f1;
+    border-right: 1px solid #f1f1f1;
+    padding: 20px 50px;
+    width: 50%;
+  }
+  .app-list-app:nth-child(2n) {
+    border-right: 0;
+    padding: 20px 0 20px 50px;
+  }
+  [dir="rtl"] .app-list-app:nth-child(2n) {
+    border-right: 1px solid #f1f1f1;
+    padding: 20px 50px 20px 0;
+  }
+  .app-list-app:nth-child(2n + 1) {
+    padding: 20px 50px 20px 0;
+  }
+  [dir="rtl"] .app-list-app:nth-child(2n + 1) {
+    border-right: 0;
+    padding: 20px 0 20px 50px;
+  }
+  .app-list-app:last-child {
+    border-right: 0;
+  }
+  [data-page-type~="purchases"] .app-list-filters {
+    display: block;
+  }
+  [data-page-type~="purchases"] section.full > div {
+    padding-top: 30px;
+  }
+}
+@media (min-width: 1050px) {
+  .app-list-page {
+    padding: 0;
+  }
+  .app-list-page.full > div {
+    padding-top: 30px;
+  }
+  .app-list {
+    max-width: 1070px;
+  }
+  .app-list.paginated .app-list-app:last-child {
+    border-right: 0;
+  }
+  .app-list.previews-expanded .app-list-app {
+    border-right: 0;
+    margin-bottom: 20px;
+    padding: 20px 10px 50px 0;
+    width: 50%;
+  }
+  [dir="rtl"] .app-list.previews-expanded .app-list-app {
+    border-left: 0;
+    padding: 20px 0 50px 10px;
+  }
+  .app-list.previews-expanded .app-list-app:nth-child(2n) {
+    padding: 20px 0 20px 10px;
+  }
+  [dir="rtl"] .app-list.previews-expanded .app-list-app:nth-child(2n) {
+    border-left: 0;
+    padding: 20px 10px 20px 0;
+  }
+  .app-list.previews-expanded .loadmore {
+    margin-top: -21px;
+  }
+  body[data-page-type~=app-list] .placeholder {
+    clear: both;
+  }
+  body[data-page-type~=app-list] .spinner {
+    top: 0;
+  }
+  .app-list-app {
+    width: 33.333333333333336%;
+  }
+  [dir="rtl"] .app-list-app {
+    border-left: 1px solid #f1f1f1;
+  }
+  .app-list-app:nth-child(2n),
+  .app-list-app:nth-child(2n + 1) {
+    padding: 20px 50px;
+  }
+  [dir="rtl"] .app-list-app:nth-child(2n),
+  [dir="rtl"] .app-list-app:nth-child(2n + 1) {
+    padding: 20px 50px;
+  }
+  .app-list-app:nth-child(2n) {
+    border-right: 1px solid #f1f1f1;
+  }
+  [dir="rtl"] .app-list-app:nth-child(2n) {
+    border-right: 0;
+  }
+  .app-list-app:nth-child(3n) {
+    border-right: 0;
+  }
+  [dir="rtl"] .app-list-app:nth-child(3n) {
+    border-left: 0;
+  }
+  .app-list-app:last-child {
+    border-right: 0;
+  }
+  [dir="rtl"] .app-list-app:last-child {
+    border-left: 0;
+  }
+}

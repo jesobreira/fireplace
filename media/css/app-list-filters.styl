@@ -1,0 +1,154 @@
+/*
+App listing filters.
+    - expand list toggle shows up in the header (mobile)
+      and in the filters area (tablet and higher)
+*/
+@import 'lib';
+
+.app-list-filters {
+    color: $greyscale-black;
+    margin: 0 auto;
+    min-height: 20px;
+    padding-bottom: 15px;
+    position: relative;
+    text-transform: uppercase;
+
+    +media--base-tablet() {
+        bottom: 0;
+        padding: 0 0 30px;
+        max-width: $desktop-content;
+
+        + .app-list  {
+            margin-top: 25px;
+        }
+    }
+}
+
+.app-list-filters-sort {
+    border-bottom: 1px solid $greyscale-light-grey;
+    display: none;
+    width: 100%;
+
+    +media--base-tablet() {
+        border: none;
+        width: auto;
+
+        +ltr() {
+            margin-right: 30px;
+        }
+        +rtl() {
+            margin-left: 30px;
+        }
+    }
+    a {
+        color: $action-positive;
+        display: inline-block;
+        ellipsis();
+        font-size: 15px;
+        height: 40px;
+        line-height: 40px;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        text-shadow: 0 .5px 1px $white;
+        vertical-align: middle;
+        width: 50%;
+        z-index: 2;
+
+        +media--base-tablet() {
+            margin-top: 0;
+            text-shadow: none;
+            width: auto;
+        }
+        &:hover {
+            text-decoration: underline;
+        }
+        &.active {
+            color: $greyscale-black;
+            pointer-events: none;
+            cursor: default;
+        }
+        &.active:before,
+        &.active:after {
+            background-color: $white;
+        }
+        + a {
+            +media--base-tablet() {
+                +ltr() {
+                    margin-left: 30px;
+                }
+                +rtl() {
+                    margin-right: 30px;
+                }
+                }
+        }
+    }
+}
+
+.app-list-filters-content {
+    display: flex;
+    height: 40px;
+    line-height: 40px;
+
+    +media--base-tablet() {
+        margin-top: 15px;
+    }
+}
+
+.app-list-filters-expand-toggle {
+    background: url(../img/pretty/list-toggle.svg) no-repeat 0 0 / 82px 80px;
+    display: none;
+    float: right;
+    height: 40px;
+    line-height: 40px;
+    margin-left: 8px;
+    width: 84px;
+
+    +rtl() {
+        float: left;
+        margin: 0 8px 0 0;
+    }
+    &.active {
+        background-position: 0 -40px;
+    }
+    &:active {
+        background: url(../img/pretty/list-toggle.svg) no-repeat 0 -40px / 82px auto;
+    }
+    &.show {
+        display: inline-block;
+
+        +media--base-tablet() {
+            display: none;
+        }
+    }
+}
+
+.app-list-filters-expand-wrapper {
+    display: none;
+
+    +media--base-tablet() {
+        display: flex;
+        margin: 0;
+
+        .app-list-filters-expand-toggle.show {
+            display: block;
+        }
+    }
+}
+
+.app-list-filters {
+    display: none;
+
+    +media--base-tablet() {
+        display: block;
+    }
+}
+
+@media $base-tablet {
+    .app-list-filters {
+        border-bottom: 2px solid $greyscale-light-grey;
+    }
+    .search-empty .app-list-filters {
+        border: 0;
+    }
+}
