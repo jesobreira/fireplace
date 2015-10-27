@@ -1,0 +1,46 @@
+@import 'lib';
+
+.no-results {
+    color: $greyscale-black;
+    font-weight: 300;
+    padding: 30px;
+    text-align: center;
+}
+
+.search-results-header b {
+    font-weight: 400;
+}
+
+.search-results-header .app-list-filters-expand-toggle {
+    position: relative;
+}
+
+.search-empty .app-list-filters {
+    bottom: -5px;
+}
+
+.search-empty .app-list-filters-expand-wrapper,
+.search-results-header-desktop {
+    display: none;
+}
+
+@media $base-tablet {
+    .search-empty .app-list-filters {
+        bottom: inherit;
+    }
+    .search-results-header-mobile {
+        display: none;
+    }
+    .search-results-header-desktop {
+        display: block;
+    }
+    .search-empty .no-results {
+        padding: 0 50px 50px;
+    }
+}
+
+@media $base-desktop {
+    #search-results {
+        margin-top: 0;
+    }
+}

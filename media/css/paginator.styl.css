@@ -1,0 +1,50 @@
+.loadmore {
+  list-style: none;
+  position: relative;
+  padding: 15px;
+}
+.loadmore span {
+  display: none;
+}
+.loadmore button {
+  display: block;
+  margin: auto;
+  max-width: 400px;
+  padding: 0;
+  width: 100%;
+}
+.loadmore button.hide,
+.loadmore button:not(.hide) + .spinner {
+  display: none;
+}
+.loadmore .throbber {
+  display: none;
+}
+.loadmore.loading button {
+  visibility: hidden;
+}
+.loadmore.loading .throbber {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 32px;
+  height: 32px;
+  border-radius: 20px;
+  border: 4px solid #666;
+  border-color: #666 transparent;
+  -webkit-animation: spin 1s linear infinite;
+          animation: spin 1s linear infinite;
+}
+.loadmore.pagination-error span.error-text {
+  display: block;
+  text-align: center;
+}
+.listing .loadmore,
+.reviews-listing .loadmore {
+  height: auto;
+  min-height: 78px;
+}

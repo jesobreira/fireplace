@@ -1,0 +1,8 @@
+(function() {
+if (!navigator.l10n) {navigator.l10n = {};}
+navigator.l10n.language = "en-GB";
+navigator.l10n.strings = {"Give us your feedback. Let us know whether we are awesome or buggy.":"Give us your feedback. Let us know whether we are cracking or buggy.","Except where otherwise <a href=\"{legal_url}\" target=\"_blank\">noted</a>, content on this site is licensed under the <a href=\"{cc_url}\" target=\"_blank\">Creative Commons Attribution Share-Alike License v3.0</a> or any later version.":"Except where otherwise <a href=\"{legal_url}\" target=\"_blank\">noted</a>, content on this site is licensed under the <a href=\"{cc_url}\" target=\"_blank\">Creative Commons Attribution Sharealike Licence v3.0</a> or any later version.","Enjoy instant fun with our handpicked selection of desktop web games you can play right in your browser.":"Enjoy instant fun with our handpicked selection of desktop web games you can play right on your browser.","Inappropriate language/dialog":"Inappropriate language/dialogue","Is there something wrong or out-of-date with this website listing?":"Is there something wrong or out-of-date with this web site listing?","Let us know if something is missing from this website listing or its information should be updated.":"Let us know if something is missing from this web site listing or its information should be updated.","Humor":"Humour","Personalization":"Personalisation","websites":"web sites","Local Favorite App":["Local Favourite App","Local Favourite Apps"],"Open website":"Open web site","Website Detail":"Web Site Detail"};
+navigator.l10n.pluralize = function(n) {
+  return (n != 1);
+};
+})();

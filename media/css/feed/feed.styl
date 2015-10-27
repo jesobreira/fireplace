@@ -1,0 +1,288 @@
+/*
+    Miscellaneous Feed styles leftover from the first iteration of the Feed.
+    Ideally, to be split out into more modularized components.
+*/
+@import '../lib';
+
+.feed-item-item {
+    // Wrapper around feed-items on the Feed (homepage).
+    margin: 0 auto $vertical-tile-padding auto;
+    max-width: $mobile-tile-width;
+    right: 0;
+    width: $mobile-tile-width;
+
+    > section {
+        padding: $vertical-tile-padding $horizontal-tile-padding;
+    }
+    > a {
+        text-decoration: none;
+    }
+}
+
+.feed {
+    list-style-type: none;
+    margin: 0 auto;
+    position: relative;
+    transition: opacity .2s .15s;
+    width: 100%;
+
+    .price {
+        display: none;
+    }
+    .group-subheader {
+        margin-bottom: $vertical-margin;
+    }
+}
+
+[data-page-type~="leaf"] .feed .mkt-tile {
+    margin-bottom: $vertical-tile-margin;
+}
+
+.app-link {
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+
+.feed-app {
+    margin-bottom: 0;
+    padding: 20px 15px 10px;
+    position: relative;
+    max-width: 100%;
+
+    &,
+    &:active {
+        background-color: $white;
+    }
+
+    .heading {
+        margin-bottom: 10px;
+    }
+    .desc {
+        type_body();
+        background-color: $white;
+        font-weight: 400;
+        margin-top: 15px;
+    }
+    blockquote {
+        // For feed item type == 'quote'.
+        line-height: 23px;
+        margin: 0;
+        padding: 0 10px;
+        text-align: center;
+    }
+    .quote-source {
+        font-size: 11px;
+        margin-top: 5px;
+        text-align: center;
+    }
+    .quote {
+        color: $white;
+        left: -10px;
+        padding: 5px 0 15px;
+        position: relative;
+        top: 15px;
+        width: $mobile-tile-width;
+
+        +rtl() {
+            left: 15px;
+        }
+    }
+    .preview {
+        .desc {
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+        .feed-app-preview-container {
+            overflow: hidden;
+            margin: 15px 0 -16px -10px;
+            height: 150px;
+            width: $mobile-tile-width;
+
+            &.vertical {
+                height: 240px;
+            }
+        }
+    }
+}
+
+.tile-footer {
+    clear: both;
+    font-size: 14px;
+    line-height: 20px;
+
+    .stars {
+        left: 50%;
+        margin: 15px 0 10px -32px;
+        position: relative;
+    }
+}
+
+.feed-app-preview {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: unquote('calc(100% - 10px)');  // Padding.
+    margin-top: 5px;
+    width: 100%;
+}
+
+.feed-view-all-tab.view-all-tab {
+    display: block;
+    margin: $vertical-margin auto 5px;
+}
+
+.multi-app-tile {
+    background-color: $white;
+    margin: 0 auto;
+    max-width: $mobile-tile-width;
+
+    &.grouped {
+        margin-bottom: $vertical-tile-padding;
+    }
+    .app-list {
+        clear: both;
+        display: inline-block;
+        list-style-type: none;
+        width: 100%;
+    }
+}
+
+// Colored or image background feed tiles.
+.feed-item {
+    background-size: cover;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    width: $mobile-tile-width;
+
+    img {
+        color: $white;
+    }
+    .app-icons {
+        display: flex;
+        height: 60px;
+        justify-content: space-between;
+        left: 50%;
+        position: absolute;
+        top: 15px;
+        transform: translate(-50%, 0);
+        width: 220px;
+        z-index: 15;
+
+        li {
+            display: inline-block;
+            height: 60px;
+            width: 60px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+        + .feed-item-curve {
+            height: 60px;
+            top: 30px;
+        }
+        &.single {
+            justify-content: center;
+        }
+    }
+    &.has-desc .feed-item-curve {
+        height: 60px;
+        top: 75px;
+    }
+    .app-icons + .feed-item-curve {
+        top: 30px;
+    }
+}
+
+// Promo tile classes.
+.feed-item-info {
+    margin-top: 90px;
+    padding: 0 10px 20px;
+    position: relative;
+    text-align: center;
+    width: $mobile-tile-width;
+    z-index: 10;
+}
+.feed-item-author {
+    line-height: $vertical-margin;
+}
+.feed-item-name {
+    color: $white;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 25px;
+}
+.feed-item-name,
+.feed-item-author {
+    ellipsis();
+    position: relative;
+    top: 8px;
+}
+.app-icons ~ .feed-item-info {
+    .feed-item-name,
+    .feed-item-author {
+        top: 0;
+    }
+}
+.feed-item-author,
+.feed-item-desc {
+    type_body($white);
+}
+.feed-item-desc {
+    margin-top: 20px;
+}
+.feed-item-mask {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    z-index: 5;
+}
+.feed-item-curve {
+    border-radius: 50% 50% 0 0;
+    height: 80px;
+    left: -50px;
+    position: absolute;
+    top: 80px;
+    width: 400px;
+    z-index: 10;
+}
+.feed-item-mask + .feed-item-curve {
+    top: 75px;
+}
+
+// Featured app authors have a smaller font size.
+.featured-app .feed-item-author {
+    font-size: 12px;
+}
+
+// Op shelf names are not a child of feed-item-info.
+.shelf .feed-item-name {
+    padding: 0 10px;
+    text-align: center;
+    top: 0;
+}
+
+[data-feed-app-has-background]:not([data-feed-app-type-icon]) .info {
+    margin-top: 83px;
+}
+
+section.full.feed-item {
+    background-size: cover;
+}
+
+.app-link {
+    &:hover,
+    &:active {
+        text-decoration: none;
+    }
+}
+
+// Resize based on percentages after mobile widths.
+@media (min-width: 360px) {
+    .feed-item-curve {
+        left: -15%;
+        width: 130%;
+    }
+}

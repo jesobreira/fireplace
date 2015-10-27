@@ -1,0 +1,232 @@
+/*
+    Marketplace Nav (for mobile).
+
+    - Adapted from mozilla/marketplace-style-guide which runs on a separate
+      Stylus codebase.
+    - Styles put here should be agnostic such that it can be re-used for
+      other Marketplace frontend projects. For Fireplace, additional components
+      such as Search, Platform Filtering, User Settings, etc, should be placed
+      in a project-specific stylesheet. But upstream stuff here if it's
+      generic enough.
+*/
+#page {
+  min-height: 420px;
+}
+.mkt-nav--wrapper {
+  position: relative;
+}
+main:after,
+.mkt-nav--wrapper:after {
+  background: rgba(121,121,121,0.8);
+  content: '';
+  left: 0;
+  display: none;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 70;
+}
+body.mkt-nav--visible main:after,
+body.mkt-nav--visible .mkt-nav--wrapper:after {
+  display: block;
+}
+@media (min-width: 800px) {
+  body.mkt-nav--visible main:after,
+  body.mkt-nav--visible .mkt-nav--wrapper:after {
+    display: none;
+  }
+}
+body {
+  padding-top: 0;
+}
+body.mkt-nav--visible {
+  overflow-y: hidden;
+  position: fixed;
+}
+@media (min-width: 800px) {
+  body.mkt-nav--visible {
+    overflow-y: auto;
+    position: static;
+  }
+}
+body.mkt-nav--visible main {
+  position: relative;
+}
+body .site-header .site {
+  width: auto;
+}
+body main {
+  background: #f1f1f1;
+  z-index: 50;
+}
+mkt-nav {
+  font-size: 18px;
+  height: 100%;
+  left: -260px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  -webkit-transition: -webkit-transform cubic-bezier(0.455, 0.03, 0.515, 0.955) 250ms, opacity 0s linear 300ms;
+          transition: transform cubic-bezier(0.455, 0.03, 0.515, 0.955) 250ms, opacity 0s linear 300ms;
+  width: 260px;
+  z-index: 80;
+}
+body.mkt-nav--visible mkt-nav {
+  -webkit-transform: translate3d(260px, 0, 0);
+          transform: translate3d(260px, 0, 0);
+  -webkit-transition: -webkit-transform cubic-bezier(0.455, 0.03, 0.515, 0.955) 250ms;
+          transition: transform cubic-bezier(0.455, 0.03, 0.515, 0.955) 250ms;
+}
+@media (min-width: 800px) {
+  mkt-nav {
+    display: none;
+  }
+}
+mkt-nav-root,
+mkt-nav-child {
+  display: block;
+  height: 100%;
+  left: -260px;
+  list-style: none inside;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: absolute;
+  top: 0;
+  -webkit-transition: -webkit-transform cubic-bezier(0.455, 0.03, 0.515, 0.955) 250ms;
+          transition: transform cubic-bezier(0.455, 0.03, 0.515, 0.955) 250ms;
+  width: 260px;
+}
+mkt-nav-root {
+  background: url("../img/nav/full-white.svg") no-repeat 30px 30px, -webkit-linear-gradient(bottom, #9e1455, #601e78, #052659);
+  background: url("../img/nav/full-white.svg") no-repeat 30px 30px, linear-gradient(to top, #9e1455, #601e78, #052659);
+  background-attachment: local;
+  background-size: 182px 35px, cover;
+  padding: 75px 21px 30px;
+}
+body.mkt-nav--visible mkt-nav-root {
+  -webkit-transform: translate3d(260px, 0, 0);
+          transform: translate3d(260px, 0, 0);
+}
+mkt-nav-root:after {
+  background: rgba(26,26,26,0.25);
+  content: '';
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 2px;
+  z-index: 80;
+}
+mkt-nav-root .mkt-nav--item {
+  margin: 25px 0;
+}
+mkt-nav-root .mkt-nav--active {
+  background: #1a95fc;
+  color: #fff;
+}
+mkt-nav-child {
+  background: #1a95fc;
+  border-right: 2px solid #0371ce;
+  padding: 60px 10px;
+  z-index: 90;
+}
+body.mkt-nav--subnav-visible mkt-nav-child {
+  -webkit-transform: translate3d(260px, 0, 0);
+          transform: translate3d(260px, 0, 0);
+}
+mkt-nav-child .mkt-nav--active,
+mkt-nav-child .mkt-nav--link:hover {
+  background: #fff;
+  color: #1a95fc;
+  text-decoration: none;
+}
+.mkt-nav--link {
+  border-radius: 5px;
+  color: #fff;
+  font-weight: 300;
+  line-height: 1;
+  padding: 25px 10px 25px;
+}
+.mkt-nav--link:active {
+  background-color: transparent;
+}
+.mkt-nav--active {
+  padding: 10px;
+}
+.mkt-nav--back {
+  background: #28a0fc;
+  border: 2px solid #037cd8;
+  border-width: 0 2px 0 0;
+  cursor: pointer;
+  display: block;
+  height: 60px;
+  left: -260px;
+  overflow: hidden;
+  padding: 0 22px;
+  position: absolute;
+  top: 0;
+  -webkit-transition: -webkit-transform cubic-bezier(0.455, 0.03, 0.515, 0.955) 250ms;
+          transition: transform cubic-bezier(0.455, 0.03, 0.515, 0.955) 250ms;
+  width: 260px;
+  z-index: 90;
+}
+.mkt-nav--back b {
+  background: #fff;
+  border-radius: 2px;
+  content: '';
+  display: block;
+  height: 3px;
+  -webkit-transition: 250ms;
+          transition: 250ms;
+}
+.mkt-nav--back b:first-of-type {
+  width: 15px;
+}
+[dir="ltr"] .mkt-nav--back b:first-of-type {
+  -webkit-transform: translate(0, 4px) rotate(-45deg);
+      -ms-transform: translate(0, 4px) rotate(-45deg);
+          transform: translate(0, 4px) rotate(-45deg);
+}
+[dir="rtl"] .mkt-nav--back b:first-of-type {
+  -webkit-transform: translate(-5px, 4px) rotate(-45deg);
+      -ms-transform: translate(-5px, 4px) rotate(-45deg);
+          transform: translate(-5px, 4px) rotate(-45deg);
+}
+.mkt-nav--back b {
+  margin: 0;
+  width: 20px;
+  -webkit-transform-origin: left;
+      -ms-transform-origin: left;
+          transform-origin: left;
+}
+.mkt-nav--back b:last-of-type {
+  width: 15px;
+}
+[dir="ltr"] .mkt-nav--back b:last-of-type {
+  -webkit-transform: translate(0, -4px) rotate(45deg);
+      -ms-transform: translate(0, -4px) rotate(45deg);
+          transform: translate(0, -4px) rotate(45deg);
+}
+[dir="rtl"] .mkt-nav--back b:last-of-type {
+  -webkit-transform: translate(-5px, -4px) rotate(45deg);
+      -ms-transform: translate(-5px, -4px) rotate(45deg);
+          transform: translate(-5px, -4px) rotate(45deg);
+}
+.mkt-nav--back:active:not([disabled]) {
+  background: #28a0fc;
+}
+body.mkt-nav--subnav-visible .mkt-nav--back {
+  -webkit-transform: translate3d(260px, 0, 0);
+          transform: translate3d(260px, 0, 0);
+}
+body.mkt-nav--visible #site-header .hamburger {
+  background-position: 0 -100px;
+}
+.mkt-nav-root--divider {
+  border: 1px solid #fff;
+  margin: 0 10px;
+  position: relative;
+  width: 195px;
+}

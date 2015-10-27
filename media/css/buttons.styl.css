@@ -1,0 +1,324 @@
+.button {
+  border: 0;
+  background: #4cb1ff;
+  border-bottom: 0;
+  color: #fff;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font: 400 15px/$medium "Fira Sans OT", "Fira Sans", FiraSansWeb, sans-serif;
+  height: 48px;
+  line-height: 1;
+  padding: 0 10px;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.button:active {
+  background: #3d86bd;
+}
+.button:hover,
+.button:focus {
+  background: #42cafe;
+}
+.button:focus,
+.button:hover,
+.button:active {
+  text-decoration: none;
+}
+.button.action {
+  background: #64be3c;
+  border-bottom: 0;
+}
+.button.action:active {
+  background: #4d8d32;
+}
+.button.action:hover,
+.button.action:focus {
+  background: #66d071;
+}
+.button.cancel {
+  background: #f54b3c;
+  border-bottom: 0;
+}
+.button.cancel:active {
+  background: #b63932;
+}
+.button.cancel:hover,
+.button.cancel:focus {
+  background: #ff6c70;
+}
+.button[disabled],
+.button.disabled,
+.button.purchasing,
+.button.installing {
+  pointer-events: none;
+}
+.button[disabled]:hover,
+.button.disabled:hover,
+.button.purchasing:hover,
+.button.installing:hover {
+  cursor: default;
+}
+.button.installed,
+.button.purchased,
+.button.incompatible {
+  pointer-events: auto;
+}
+.button.t {
+  height: 28px;
+}
+.button.s {
+  border-radius: 5px;
+  height: 36px;
+}
+.button.l {
+  height: 60px;
+}
+.button.loading-submit {
+  position: relative;
+}
+.button.loading-submit:after {
+  content: "";
+  display: block;
+  -webkit-animation: 0.9s spin infinite steps(30);
+          animation: 0.9s spin infinite steps(30);
+  height: 30px;
+  margin: 0 auto;
+  background: url("../img/btn_spinner.png") no-repeat center;
+  width: 30px;
+  left: 50%;
+  margin-left: -15px;
+  position: absolute;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAAnFBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4jUzeAAAANHRSTlMoDw0uDAsqISceLQkIKyUHFxsdHy8SDhQVGCQiJhoQLAUxChwGFikREwQgGTAjMgIDATMALVRcswAAASBJREFUeNp109eWgjAARVEVKwioFBWklyCkQf7/3yYzgRUZzHnd6z7eFZsq72GSYYzdV1WyqYlzNMhg/o9vw6xoxrQe5lWSpUIUNU2E4FDTTxaqN5TJJBcYc20lztjIMPd2ISMfsizDDlNwCiHMTKpi4LoQekzFhea6CVUy0jWtZUq2El2/qDlIkgSoGZmmGas53O/3DzW3db0qvknf/3J3PB4DomT/xfO/KI/z27KswFnOiWDWBQEKHwslRLCNUHho73Olbzoya7g6J49I7N+pZHbleiu6nEx4tv+YCSYd12vUVfHubBu7zdawS85MMPcn5+55qR73BsT+Nj+XKf28QXyNRvYE0/mJUvAcGaw3u7JnkkXU8IEH4vUmTzmO/QBhgZ0/tlb0mAAAAABJRU5ErkJggg==");
+  top: 8px;
+}
+.button .spin {
+  display: inline-block;
+  -webkit-animation: 0.9s spin infinite steps(30);
+          animation: 0.9s spin infinite steps(30);
+  height: 30px;
+  margin: 0 auto;
+  background: url("../img/btn_spinner.png") no-repeat center;
+  width: 30px;
+  height: 18px;
+  margin: 3px 0;
+  background: url("../img/btn_spinner_18.png") no-repeat center;
+  width: 18px;
+}
+a.button {
+  border-radius: 5px;
+  padding-top: 17px;
+}
+a.button.t {
+  padding-top: 5px;
+}
+.arrow-btn {
+  background: #4cb1ff url("../img/pretty/arrow-l.svg") no-repeat 5px 50%/15px 15px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  color: transparent;
+  cursor: pointer;
+  font-size: 0;
+  height: 30px;
+  -webkit-transition: 150ms;
+          transition: 150ms;
+  width: 30px;
+}
+.arrow-btn:hover {
+  background-color: #42cafe;
+}
+.arrow-btn:active {
+  background: #3d86bd url("../img/pretty/arrow-l.svg") no-repeat 5px 50%/15px 15px;
+}
+.arrow-btn.arrow-btn-next {
+  background-position: 5px 50%;
+  -webkit-transform: scaleX(-1);
+      -ms-transform: scaleX(-1);
+          transform: scaleX(-1);
+}
+.arrow-btn.arrow-btn-disabled {
+  background-color: #cbcbcb;
+  cursor: default;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 2), screen and (min--moz-device-pixel-ratio: 2), screen and (min-device-pixel-ratio: 2) {
+  .button.loading-submit:after {
+    background-image: url("../img/btn_spinner_alt_2x.png");
+    background-size: 30px auto;
+  }
+  .button .spin {
+    background-image: url("../img/btn_spinner_18_2x.png");
+    background-size: 18px auto;
+  }
+}
+.mkt-app-button {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+     -moz-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: transparent;
+  border-bottom: 0;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 12px;
+  height: 28px;
+  margin-top: 8px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.mkt-app-button:active {
+  background: transparent;
+}
+.mkt-app-button:hover,
+.mkt-app-button:focus {
+  background: transparent;
+}
+.mkt-app-button.button {
+  padding: 0;
+}
+[dir="rtl"] .mkt-app-button {
+  left: 0;
+  right: inherit;
+}
+.mkt-app-button em {
+  background: #4cb1ff;
+  border-bottom: 0;
+  border-radius: 5px;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-style: normal;
+  height: 28px;
+  line-height: 28px;
+  min-width: 90px;
+  padding: 0 10px;
+  position: relative;
+  vertical-align: bottom;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.mkt-app-button em:active {
+  background: #3d86bd;
+}
+.mkt-app-button em:hover,
+.mkt-app-button em:focus {
+  background: #42cafe;
+}
+[data-page-type~="website"] .mkt-app-button em {
+  font-size: 15px;
+  height: 48px;
+  line-height: 48px;
+  width: 100%;
+}
+@media (min-width: 700px) {
+  [data-page-type~="website"] .mkt-app-button em {
+    height: 60px;
+    line-height: 60px;
+    padding: 0 40px;
+  }
+}
+.mkt-app-button:hover em {
+  background: #42cafe;
+}
+.mkt-app-button:active em {
+  background: #3d86bd;
+}
+.mkt-app-button[disabled] em {
+  background: #cbcbcb;
+  border-bottom: 0;
+}
+.mkt-app-button[disabled] em:active {
+  background: #cbcbcb;
+}
+.mkt-app-button[disabled] em:hover,
+.mkt-app-button[disabled] em:focus {
+  background: #cbcbcb;
+}
+.mkt-app-button .spin {
+  display: none;
+}
+.mkt-app-button.spinning,
+.mkt-app-button.purchasing {
+  bottom: 0;
+  height: 28px;
+}
+.mkt-app-button.spinning .mkt-app-button-text,
+.mkt-app-button.purchasing .mkt-app-button-text {
+  visibility: hidden;
+}
+.mkt-app-button.spinning .mkt-app-button-spinner,
+.mkt-app-button.purchasing .mkt-app-button-spinner {
+  bottom: 0;
+  display: inline-block;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+[data-page-type~="detail"] .mkt-app-button {
+  margin-top: 0;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+[data-page-type~="website"] .mkt-app-button {
+  height: 48px;
+  line-height: 48px;
+  width: 100%;
+}
+@media (min-width: 700px) {
+  [data-page-type~="website"] .mkt-app-button {
+    height: 60px;
+    line-height: 60px;
+    margin: 30px auto;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+  }
+}
+[dir="rtl"] .mkt-app-button {
+  left: 0;
+  right: inherit;
+}
+.langpack > button.install {
+  position: static;
+}
+.mkt-app-button.launch {
+  background: transparent;
+  border-bottom: 0;
+}
+.mkt-app-button.launch:active {
+  background: transparent;
+}
+.mkt-app-button.launch:hover,
+.mkt-app-button.launch:focus {
+  background: transparent;
+}
+.mkt-app-button.launch em {
+  background: #64be3c;
+  border-bottom: 0;
+}
+.mkt-app-button.launch em:active {
+  background: #4d8d32;
+}
+.mkt-app-button.launch em:hover,
+.mkt-app-button.launch em:focus {
+  background: #66d071;
+}
+.mkt-app-button.launch:hover em,
+.mkt-app-button.launch:focus em {
+  background: #66d071;
+}
+.mkt-app-button.launch:active em {
+  background: #4d8d32;
+}

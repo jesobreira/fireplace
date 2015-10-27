@@ -1,0 +1,157 @@
+/*
+App listing filters.
+    - expand list toggle shows up in the header (mobile)
+      and in the filters area (tablet and higher)
+*/
+.app-list-filters {
+  color: #1a1a1a;
+  margin: 0 auto;
+  min-height: 20px;
+  padding-bottom: 15px;
+  position: relative;
+  text-transform: uppercase;
+}
+@media (min-width: 700px) {
+  .app-list-filters {
+    bottom: 0;
+    padding: 0 0 30px;
+    max-width: 1070px;
+  }
+  .app-list-filters + .app-list {
+    margin-top: 25px;
+  }
+}
+.app-list-filters-sort {
+  border-bottom: 1px solid #f1f1f1;
+  display: none;
+  width: 100%;
+}
+@media (min-width: 700px) {
+  .app-list-filters-sort {
+    border: none;
+    width: auto;
+  }
+  [dir="ltr"] .app-list-filters-sort {
+    margin-right: 30px;
+  }
+  [dir="rtl"] .app-list-filters-sort {
+    margin-left: 30px;
+  }
+}
+.app-list-filters-sort a {
+  color: #4cb1ff;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 15px;
+  height: 40px;
+  line-height: 40px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 0.5px 1px #fff;
+  vertical-align: middle;
+  width: 50%;
+  z-index: 2;
+}
+@media (min-width: 700px) {
+  .app-list-filters-sort a {
+    margin-top: 0;
+    text-shadow: none;
+    width: auto;
+  }
+}
+.app-list-filters-sort a:hover {
+  text-decoration: underline;
+}
+.app-list-filters-sort a.active {
+  color: #1a1a1a;
+  pointer-events: none;
+  cursor: default;
+}
+.app-list-filters-sort a.active:before,
+.app-list-filters-sort a.active:after {
+  background-color: #fff;
+}
+@media (min-width: 700px) {
+  [dir="ltr"] .app-list-filters-sort a + a {
+    margin-left: 30px;
+  }
+  [dir="rtl"] .app-list-filters-sort a + a {
+    margin-right: 30px;
+  }
+}
+.app-list-filters-content {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 40px;
+  line-height: 40px;
+}
+@media (min-width: 700px) {
+  .app-list-filters-content {
+    margin-top: 15px;
+  }
+}
+.app-list-filters-expand-toggle {
+  background: url("../img/pretty/list-toggle.svg") no-repeat 0 0/82px 80px;
+  display: none;
+  float: right;
+  height: 40px;
+  line-height: 40px;
+  margin-left: 8px;
+  width: 84px;
+}
+[dir="rtl"] .app-list-filters-expand-toggle {
+  float: left;
+  margin: 0 8px 0 0;
+}
+.app-list-filters-expand-toggle.active {
+  background-position: 0 -40px;
+}
+.app-list-filters-expand-toggle:active {
+  background: url("../img/pretty/list-toggle.svg") no-repeat 0 -40px/82px auto;
+}
+.app-list-filters-expand-toggle.show {
+  display: inline-block;
+}
+@media (min-width: 700px) {
+  .app-list-filters-expand-toggle.show {
+    display: none;
+  }
+}
+.app-list-filters-expand-wrapper {
+  display: none;
+}
+@media (min-width: 700px) {
+  .app-list-filters-expand-wrapper {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin: 0;
+  }
+  .app-list-filters-expand-wrapper .app-list-filters-expand-toggle.show {
+    display: block;
+  }
+}
+.app-list-filters {
+  display: none;
+}
+@media (min-width: 700px) {
+  .app-list-filters {
+    display: block;
+  }
+}
+@media (min-width: 700px) {
+  .app-list-filters {
+    border-bottom: 2px solid #f1f1f1;
+  }
+  .search-empty .app-list-filters {
+    border: 0;
+  }
+}

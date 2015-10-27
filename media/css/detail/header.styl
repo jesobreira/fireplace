@@ -1,0 +1,132 @@
+/*
+    The header section at the top of the app detail page, featuring the app
+    tile.
+*/
+@import '../lib';
+
+[data-page-type~="website"] {
+    .mkt-tile {
+        height: auto;
+    }
+    .mkt-app-button {
+        margin: 0 auto;
+    }
+    .app-notices {
+        display: none;
+    }
+}
+
+.website-header.full,
+.app-header.full {
+    margin-bottom: -10px;
+    padding-bottom: 0;
+
+    > div {
+        padding-bottom: 0;
+        padding-top: 0;
+    }
+}
+
+.website-header.full {
+    background-color: $greyscale-white;
+    min-height: auto;
+
+    +website-detail--wide() {
+        padding-bottom: 30px;
+    }
+}
+
+[data-page-type~="detail"] .app-notices {
+    border-top: 1px solid $tile-border;
+    margin-top: 0;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+
+    > span {
+        background: $action-positive;
+        border-radius: 100px;
+        color: $white;
+        display: inline-block;
+        font-weight: 300;
+        margin: 5px;
+        padding: 8px 15px;
+
+        &.positive {
+            background: $action-success;
+        }
+        &.negative {
+            background: $action-error;
+        }
+    }
+}
+
+[data-page-type~="detail"] .button.install {
+    padding: 0;
+
+    &.spinning,
+    &.purchasing {
+        bottom: -8px;
+    }
+}
+
+@media $base-tablet {
+    [data-page-type~="detail"] {
+        .subheader {
+            display: block;
+        }
+        .detail,
+        .main,
+        .mkt-tile {
+            overflow: visible
+        }
+        .heading {
+            margin-bottom: 70px;
+        }
+        .mkt-tile {
+            .icon {
+                // Get the icon in the middle.
+                height: 128px;
+                left: 0;
+                margin: 0 auto;
+                right: 0;
+                position: absolute;
+                text-align: center;
+                top: -64px;
+                width: 128px;
+            }
+            .info {
+                padding: 0;
+                position: relative;
+            }
+            .cnt {
+                margin: 0 10px 0 0;
+
+                +rtl() {
+                    margin: 0 0 0 10px;
+                }
+            }
+        }
+        .button.install {
+            height: $btn-small;
+
+            &.spinning,
+            &.purchasing {
+                bottom: auto;
+            }
+            em {
+                font-size: 15px;
+                height: $btn-small;
+                line-height: $btn-small;
+            }
+        }
+    }
+}
+
+@media $base-desktop {
+    [data-page-type~="detail"] .mkt-tile .stars {
+        position: relative;
+        top: 4px;
+    }
+
+}

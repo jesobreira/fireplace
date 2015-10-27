@@ -1,0 +1,49 @@
+/*
+    Grid layout for brands and collections. Mostly app icons.
+*/
+@import '../lib';
+
+.icon-app-grid {
+    display: flex;
+    flex-align: center;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    li {
+        list-style: none;
+        height: 128px;
+        margin-top: 20px;
+        width: 50%;
+    }
+}
+
+.icon-app-grid__app {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.icon-app-grid img {
+    max-width: 100%;
+}
+
+.icon-app-grid__name {
+    color: $greyscale-black;
+    ellipsis();
+    font-size: 20px;
+    font-weight: 200;
+    line-height: 50px;
+    max-width: 90%;
+    text-align: center;
+    width: 100%;
+}
+
+.icon-app-grid__price {
+    color: $action-positive;
+    line-height: 0;
+    position: relative;
+}

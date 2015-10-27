@@ -1,0 +1,52 @@
+/*
+    Message that pops up after app installs that tells the user how to launch
+    the app on different platforms.
+*/
+.post-install-message {
+  background-color: #4cb1ff;
+  display: none;
+  padding: 15px 10px;
+  position: relative;
+  text-align: center;
+  width: calc(100% + 20px);
+}
+[dir="ltr"] .post-install-message {
+  right: 10px;
+}
+[dir="rtl"] .post-install-message {
+  left: 10px;
+}
+.post-install-message b,
+.post-install-message span {
+  color: #1a1a1a;
+  line-height: 22px;
+  font-size: 15px;
+  font-weight: 300;
+  color: #fff;
+}
+.post-install-message b {
+  font-weight: 500;
+}
+.post-install-message .post-install-message-installed:before {
+  background: url("../img/pretty/tick-white.svg") no-repeat;
+  background-size: contain;
+  content: "";
+  display: inline-block;
+  height: 15px;
+  margin: 0 10px;
+  vertical-align: middle;
+  width: 19px;
+}
+.post-install-message .post-install-message-how {
+  display: none;
+}
+@media (min-width: 1050px) {
+  .post-install-message {
+    margin-left: -3000px;
+    margin-right: -3000px;
+    padding-left: 3000px;
+    padding-right: 3000px;
+    right: 0;
+    width: auto;
+  }
+}

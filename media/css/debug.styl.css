@@ -1,0 +1,60 @@
+.debug .button {
+  display: inline-block;
+  margin: 5px 0;
+  width: 100%;
+}
+.debug div > h3 {
+  color: #1a1a1a;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 18px;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+.debug dl {
+  margin-left: 0;
+}
+.debug dt {
+  clear: left;
+  margin-bottom: 5px;
+  display: block;
+}
+.debug dd {
+  margin-bottom: 20px;
+}
+.debug label {
+  display: inline-block;
+  font-size: 18px;
+  margin-top: 20px;
+}
+.debug select {
+  display: block;
+  margin: 10px 0;
+  width: 100%;
+}
+.debug-features div > h3 {
+  color: #1a1a1a;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 18px;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+.debug-features .present {
+  background: #64be3c;
+}
+.debug-features .absent {
+  background: #f54b3c;
+}
+.debug-features dt {
+  color: #fff;
+  font-weight: 500;
+  margin: 35px 0 10px;
+  padding: 10px 0 10px 5px;
+}
+.debug-features dd {
+  color: #1a1a1a;
+  line-height: 22px;
+  font-size: 15px;
+  font-weight: 300;
+}

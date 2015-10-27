@@ -1,0 +1,12 @@
+[data-page-type~="carrier-apps"] .subheader {
+  margin: 20px;
+  text-align: center;
+}
+[data-page-type~="carrier-apps"] .subheader h1 {
+  line-height: 1;
+  margin: 0 0 10px;
+  padding: 0;
+}
+[data-page-type~="carrier-apps"] mkt-banner[name="carrier-apps-banner"] {
+  display: none;
+}
