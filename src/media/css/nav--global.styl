@@ -160,12 +160,15 @@ desktop-link-active() {
         }
     }
     &.above { // Overlay will slide in from the top.
+        top: -9999px; // Fix for FxOS 1.1
         transform: translate(0, -100vh);
     }
     &.below { // Overlay will slide in from the bottom.
+        top: 9999px; // Fix for FxOS 1.1
         transform: translate(0, 100vh);
     }
     &.overlay-visible {
+        top: 0; // Fix for FxOS 1.1
         transform: translate(0, 0);
     }
     .overlay-divider {
