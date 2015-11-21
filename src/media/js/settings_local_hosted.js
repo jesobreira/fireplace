@@ -13,8 +13,9 @@ define('settings_local',
         iframe_potatolytics_src: origin + '/potatolytics.html',
         potatolytics_enabled: false,
         tracking_enabled: true,
-        addonsEnabled: false,
-        meowEnabled: true,
-        gametimeEnabled: true,
+        addonsEnabled: window.location.search.indexOf('addonsEnabled=true') !== -1,
+        homescreensEnabled: window.location.search.indexOf('homescreensEnabled=true') !== -1,
+        lateCustomizationEnabled: window.location.search.indexOf('lateCustomizationEnabled=true') !== -1,
+        meowEnabled: true
     };
 });

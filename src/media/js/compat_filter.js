@@ -30,14 +30,13 @@ define('compat_filter',
 
     // Endpoints where feat. profile enabled if conditions met. See apiArgs().
     var ENDPOINTS_WITH_FEATURE_PROFILE = [
-        'category', 'feed', 'feed-app', 'feed-brand', 'feed-collection',
+        'app', 'category', 'feed', 'feed-app', 'feed-brand', 'feed-collection',
         'feed-items', 'feed-shelf', 'installed', 'recommended', 'search'
     ];
     var featureProfile = utils.getVars().pro || '7fffffffffff0.51.6';
 
     // Don't do device filtering for these endpoints.
-    var EXCLUDE_DEVICE_FILTER_ENDPOINTS = ['feed-app', 'games-daily',
-                                           'games-listing'];
+    var EXCLUDE_DEVICE_FILTER_ENDPOINTS = ['feed-app'];
 
     var DEVICE_CHOICES = {
         '': gettext('All Platforms'),

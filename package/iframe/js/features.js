@@ -1,9 +1,8 @@
 var logger = require('./logger');
 
-
 // Bump this number every time you add a feature. It must match zamboni's
 // settings.APP_FEATURES_VERSION.
-var APP_FEATURES_VERSION = 8;
+var APP_FEATURES_VERSION = 9;
 
 // See zamboni docs for the order - it matters, we'll push promises in the same
 // order to generate the features signature.
@@ -22,7 +21,8 @@ var FEATURES = [
     ['hardware.memory', 512],
     ['hardware.memory', 1024],
     true, // NFC
-    'acl.version', // OpenMobile ACL
+    'acl.version', // OpenMobile ACL,
+    'api.window.UDPSocket',
 ];
 
 function FeaturesBitField(size) {
@@ -54,6 +54,7 @@ FeaturesBitField.prototype.set = function(i, value) {
 FeaturesBitField.prototype.toBase64 = function() {
     return btoa(String.fromCharCode.apply(null, this.values));
 };
+
 
 function buildFeaturesPromises(features, navigator) {
     navigator = navigator || window.navigator;
@@ -131,13 +132,81 @@ function generateFeatureProfile(features, navigator) {
             // we make changes.
             APP_FEATURES_VERSION
         ].join('.');
-        logger.log('Generated profile: ' + profile);
         return profile;
+    });
+}
+
+/*
+ * Utility function that converts an object to an array of objects.
+ * Used because Promise.all() does not accept an object for its iterable, it
+ * really wants an array :(.
+ */
+function mapPromisesObjectToArray(obj) {
+    // Function that returns a function to use as the promise callback.
+    var makeArrayEntry = function(key) {
+        return function(value) {
+            return {name: key, value: value};
+        };
+    };
+
+    return Object.keys(obj).map(function(key) {
+        // Push a promise that resolves to a {name: ..., value: ...} object.
+        return obj[key].then(makeArrayEntry(key));
+    });
+}
+
+/*
+ * Utility function that converts an array of objects to an object.
+ * Companion to mapPromisesObjectToArray above.
+ */
+function mapArrayToObject(arr) {
+    var obj = {};
+
+    for (var i = 0; i < arr.length; i ++) {
+        // Build the object from each {name: ..., value: ...} object in the
+        // array.
+        obj[arr[i].name] = arr[i].value;
+    }
+
+    return obj;
+}
+
+/**
+ * Check for extra features that do not have feature flags.
+ *
+ * Returns a promise that is fulfilled when all checks are complete. Its value
+ * is an object containing booleans indicating whether the features are
+ * enabled, like this:
+ * {
+ *   addonsEnabled: true,
+ *   homescreensEnabled: false,
+ *   ...
+ * }
+ */
+function checkForExtraFeatures(navigator) {
+    navigator = navigator || window.navigator;
+
+    if (typeof navigator.hasFeature === 'undefined') {
+        return new Promise(function(resolve, reject) {
+            // Resolve immediately with no data if we haven't hasFeature().
+            resolve({});
+        })
+    }
+
+   var promises = {
+        addonsEnabled: navigator.hasFeature('web-extensions'),
+        homescreensEnabled: navigator.hasFeature('manifest.role.homescreen'),
+        lateCustomizationEnabled: navigator.hasFeature('late-customization'),
+    };
+
+    return Promise.all(mapPromisesObjectToArray(promises)).then(function(res) {
+        return mapArrayToObject(res);
     });
 }
 
 module.exports = {
     FeaturesBitField: FeaturesBitField,
     buildFeaturesPromises: buildFeaturesPromises,
+    checkForExtraFeatures: checkForExtraFeatures,
     generateFeatureProfile: generateFeatureProfile,
 };

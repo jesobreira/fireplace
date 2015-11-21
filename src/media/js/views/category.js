@@ -1,10 +1,8 @@
 define('views/category',
     ['categories', 'core/capabilities', 'core/format', 'core/settings',
-     'core/urls', 'core/utils', 'core/z', 'underscore', 'tracking_events',
-     'views/games/listing'],
+     'core/urls', 'core/utils', 'core/z', 'underscore', 'tracking_events'],
     function(categories, caps, format, settings,
-             urls, utils, z, _, trackingEvents,
-             gamesListing) {
+             urls, utils, z, _, trackingEvents) {
     'use strict';
 
     return function(builder, args, params) {
@@ -16,7 +14,11 @@ define('views/category',
             builder.z('title', name);
         }
 
-        builder.z('type', 'root category app-list');
+        if (params.sort) {
+            builder.z('type', 'root category app-list new nav-apps');
+        } else {
+            builder.z('type', 'root category app-list popular nav-apps');
+        }
         builder.z('show_cats', true);
         builder.z('cat', slug);
 
@@ -28,9 +30,13 @@ define('views/category',
                                        slug);
         var newSrc = format.format(trackingEvents.SRCS.categoryNew, slug);
 
+        // Optimistically update the category dropdown.
+        $('.header-categories-btn .cat-trigger').text(name);
+
         builder.start('category.html', {
             category: slug,
             category_name: name,
+            categories: categories,
             endpoint: urls.api.unsigned.url('category', [slug], params),
             popularUrl: utils.urlparams(urls.reverse('category', [slug]), {
                 src: popularSrc
@@ -39,8 +45,6 @@ define('views/category',
                 sort: 'reviewed',
                 src: newSrc
             }),
-            showPersonalizationSubmenu: (slug === 'personalization' &&
-                                         settings.addonsEnabled),
             sort: params.sort,
             source: params.sort ? newSrc: popularSrc,
         });

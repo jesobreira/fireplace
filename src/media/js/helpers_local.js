@@ -1,9 +1,9 @@
 define('helpers_local',
-    ['apps', 'buttons', 'categories', 'content_filter', 'compat_filter',
+    ['apps', 'buttons', 'categories', 'compat_filter',
      'content-ratings', 'core/format', 'core/helpers', 'core/models',
      'core/nunjucks', 'core/settings', 'core/urls', 'core/utils', 'core/z',
      'feed', 'regions', 'tracking_events', 'user_helpers', 'utils_local'],
-    function(apps, buttons, categories, contentFilter, compatFilter,
+    function(apps, buttons, categories, compatFilter,
              iarc, format, base_helpers, models,
              nunjucks, settings, urls, utils, z,
              feed, regions, trackingEvents, user_helpers, utils_local) {
@@ -153,34 +153,14 @@ define('helpers_local',
         return document.documentElement.dir;
     }
 
-    var GAME_CATEGORIES = {
-        'featured-game-adventure': gettext('Adventure Game'),
-        'featured-game-action': gettext('Action Game'),
-        'featured-game-puzzle': gettext('Puzzle Game'),
-        'featured-game-strategy': gettext('Strategy Game')
-    };
-    function getGameCategory(game) {
-        var categories = game.tags || game.keywords;
-        if (!categories) {
-            return;
-        }
-        for (var i = 0; i < categories.length; i++) {
-            if (categories[i] in GAME_CATEGORIES) {
-                return GAME_CATEGORIES[categories[i]];
-            }
-        }
-    }
-
     var helpers = {
         apps: apps,
         app_notices: app_notices,
         appOrWebsite: function(obj) {
             return obj.manifest_url ? 'app' : 'website';
         },
-        contentFilter: contentFilter,
         cast_app: models('app').cast,
         fileSize: filters.fileSize,
-        getGameCategory: getGameCategory,
         htmldir: htmldir,
         format: format.format,
         getReviewId: getReviewId,

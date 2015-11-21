@@ -33,7 +33,7 @@ $desktop-tile-padding = $tile-padding-y $tile-padding-x;
 .app-list {
     list-style: none;
     min-height: 190px;
-    
+
     // Masking element to cover the last row's bottom border.
     &:after {
         background: $white;
@@ -51,8 +51,14 @@ $desktop-tile-padding = $tile-padding-y $tile-padding-x;
     }
 }
 
-.paginated:after {
-    bottom: 102px;
+// After pseudo element hides the last bottom border when a list is paginated.
+.paginated::after { bottom: 152px; }
+.previews-expanded.paginated::after {
+     bottom: 112px;
+
+    +media--base-desktop() {
+        bottom: 72px;
+    }
 }
 
 .app-list-app {
@@ -81,6 +87,10 @@ $desktop-tile-padding = $tile-padding-y $tile-padding-x;
 
 section.langpacks > div {
     padding-top: 0;
+}
+
+.app-list-page .app-list {
+    margin-top: -20px;
 }
 
 @media $base-tablet {
@@ -152,6 +162,14 @@ section.langpacks > div {
         section.full > div {
             padding-top: 30px;
         }
+    }
+    .app-list-homescreens {
+        .app-list-filters {
+            display: none;
+        }
+    }
+    .app-list-page .app-list {
+        margin-top: 0;
     }
 }
 
@@ -236,7 +254,7 @@ section.langpacks > div {
 
             +rtl() {
                 border-left: 0;
-            }            
+            }
         }
     }
 }

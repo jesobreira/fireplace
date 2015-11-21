@@ -14,6 +14,12 @@
        name: 'marketplace-app',
        data: {slug: 'littlealchemy'}
     });
+
+    or if using the website, for instance in the packaged iframe:
+    win.postMessage({
+        name: 'marketplace-addon',
+        data: {slug: 'm-in-status-bar'}},
+    '*')
 */
 define('webactivities',
     ['apps', 'buttons', 'core/capabilities', 'core/defer', 'core/log', 'core/login',
@@ -30,6 +36,12 @@ define('webactivities',
         var url, manifest_url, slug;
 
         switch (name) {
+            case 'marketplace-addon':
+                // Load up an addon detail page.
+                url = urls.reverse('addon', [data.slug]);
+                z.page.trigger('navigate',
+                               [utils.urlparams(url, {src: src})]);
+                break;
             case 'marketplace-app':
                 // first: has this webactivity been hijacked to convey FxA login info?
                 if (data.type === 'login') {
@@ -54,22 +66,19 @@ define('webactivities',
                 z.page.trigger('navigate', [utils.urlparams(url, {src: src})]);
                 break;
             case 'marketplace-category':
-                // Are we trying to load langpacks ?
+                // "langpacks", "homescreens", or "addons" are not real
+                // categories, so we need to pick a specific url for those.
                 if (data.slug == 'langpacks') {
                     url = urls.reverse('langpacks', [data.fxos_version]);
+                } else if (data.slug == 'addons') {
+                    url = urls.reverse('addons');
+                } else if (data.slug == 'homescreens') {
+                    url = urls.reverse('homescreens');
                 } else {
-                    // Load up a category page.
+                    // For regular categories we just reverse the category url.
                     url = urls.reverse('category', [data.slug]);
                 }
                 z.page.trigger('navigate', [utils.urlparams(url, {src: src})]);
-                break;
-            case 'marketplace-search':
-                if (data.type === 'firefox-os-app-stats') {
-                    z.page.trigger('navigate', urls.reverse('usage'));
-                    break;
-                }
-                // Load up a search.
-                z.page.trigger('search', {q: data.query, src: src});
                 break;
             case 'marketplace-openmobile-acl':
                 logger.log('Handling openmobile-acl', data.acl_version);
@@ -139,6 +148,20 @@ define('webactivities',
                 } else {
                     def.reject('NO_ACL_APP_FOUND_FOR_THIS_CHIPSET');
                 }
+                break;
+            case 'marketplace-search':
+                if (data.type === 'firefox-os-app-stats') {
+                    z.page.trigger('navigate', urls.reverse('usage'));
+                    break;
+                }
+                // Load up a search.
+                z.page.trigger('search', {q: data.query, src: src});
+                break;
+            case 'marketplace-website':
+                // Load up a website detail page.
+                url = urls.reverse('website', [data.id]);
+                z.page.trigger('navigate',
+                               [utils.urlparams(url, {src: src})]);
                 break;
         }
     }

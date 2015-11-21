@@ -7,7 +7,7 @@ var translations = require('./translations');
 
 logger.log('MKT_URL:', process.env.MKT_URL);
 
-function buildQS(profile) {
+function buildQS(profile, extraFeatures) {
     var qs = [];
 
     try {
@@ -65,7 +65,17 @@ function buildQS(profile) {
     }
 
     if (profile) {
+        logger.log('Generated profile: ' + profile);
         qs.push('pro=' + encodeURIComponent(profile));
+    }
+
+    if (extraFeatures) {
+        Object.keys(extraFeatures).forEach(function(key) {
+            logger.log(key + ': ' + extraFeatures[key]);
+            if (extraFeatures[key]) {
+                qs.push(key + '=true');
+            }
+        });
     }
 
     return qs.join('&');
@@ -100,8 +110,14 @@ if (isSystemDateIncorrect()) {
     if (typeof window.Promise !== 'undefined' &&
         typeof navigator.getFeature !== 'undefined') {
         logger.log('navigator.getFeature and window.Promise available');
-        features.generateFeatureProfile().then(function(profile) {
-            launchIframe(profile);
+        var allStartupPromises = Promise.all([
+            features.generateFeatureProfile(),
+            features.checkForExtraFeatures(),
+        ]);
+        allStartupPromises.then(function(promises) {
+            var featureProfile = promises[0];
+            var extraFeatures = promises[1];
+            launchIframe(featureProfile, extraFeatures);
         });
     } else {
         logger.log('navigator.getFeature or window.Promise unavailable :(');
@@ -118,13 +134,14 @@ if (isSystemDateIncorrect()) {
     }, false);
 }
 
-function launchIframe(profile) {
+function launchIframe(profile, hasWebExtensions) {
     // Set the iframe src to the actual Marketplace.
     var iframe = document.getElementById('iframe');
     iframe.onerror = function() {
         document.body.classList.add('offline');
     };
-    iframe.src = process.env.MKT_URL + '/?' + buildQS(profile);
+    iframe.src = process.env.MKT_URL +
+                 '/?' + buildQS(profile, hasWebExtensions);
 }
 
 function toggleOffline(init) {

@@ -20,14 +20,15 @@ define('views/debug',
                                    timeout: 1000});
     })
 
-    .on('click', '#enable-gametime', function() {
-        settings.gametimeEnabled = true;
-        z.page.trigger('navigate', '/');
+    .on('click', '#enable-addons', function() {
+        storage.setItem('always_show_extensions', 1);
+        settings.addonsEnabled = true;
+        window.location.href = '/';
     })
 
-    .on('click', '#enable-addons', function() {
-        settings.addonsEnabled = true;
-        z.page.trigger('navigate', '/addons');
+    .on('click', '#disable-addons', function() {
+        storage.removeItem('always_show_extensions');
+        window.location.href = '/';
     })
 
     .on('click', '#enable-offline-cache', function() {

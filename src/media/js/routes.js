@@ -24,11 +24,11 @@ define('routes',
         {'pattern': '^/feed/(collection|editorial|shelf)/([^/<>"\']+)/?$',
          'view_name': 'feed_landing'},
         {'pattern': '^/feedback$', 'view_name': 'feedback'},
-        {'pattern': '^/games/([^/<>"\']+)$', 'view_name': 'games/listing'},
+        {'pattern': '^/homescreens/?$', 'view_name': 'homescreens'},
         {'pattern': '^/langpacks/([^/<>"\']+)$', 'view_name': 'langpacks'},
-        {'pattern': '^/new$', 'view_name': 'new'},
+        {'pattern': '^/new$', 'view_name': 'new_apps'},
         {'pattern': '^/newsletter-signup$', 'view_name': 'newsletter_signup'},
-        {'pattern': '^/popular$', 'view_name': 'popular'},
+        {'pattern': '^/popular$', 'view_name': 'popular_apps'},
         {'pattern': '^/privacy-policy$', 'view_name': 'privacy'},
         {'pattern': '^/purchases$', 'view_name': 'purchases'},
         {'pattern': '^/recommended$', 'view_name': 'recommended'},
@@ -39,12 +39,16 @@ define('routes',
         {'pattern': '^/website/([^/<>"\']+)/?$', 'view_name': 'website'},
         {'pattern': '^/website/([^/<>"\']+)/issue/?$',
          'view_name': 'website/issue'},
+        {'pattern': '^/websites/?$', 'view_name': 'popular_websites'},
+        {'pattern': '^/websites-new/?$', 'view_name': 'new_websites'},
+        {'pattern': '^/websites/category/([^/<>"\']+)$', 'view_name': 'category_websites'}
     ]);
 
     // When this goes away we can remove settings_app from our deps.
-    var search = '/api/v2/fireplace/search/?cache=1&vary=0';
-    if (settings.meowEnabled) {
-        search = '/api/v2/fireplace/multi-search/?cache=1&vary=0';
+    var baseSearch = '/api/v2/fireplace/multi-search/?cache=1&vary=0';
+    var search = baseSearch;
+    if (settings.addonsEnabled) {
+        search += '&doc_type=webapp,extension,website';
     }
 
     router.api.addRoutes({
@@ -54,7 +58,8 @@ define('routes',
         'app': '/api/v2/fireplace/app/{0}/?cache=1&vary=0',
         'app/privacy': '/api/v2/apps/app/{0}/privacy/?cache=1&vary=0',
         'app_abuse': '/api/v2/abuse/app/',
-        'category': search + '&cat={0}',
+        'category': baseSearch + '&cat={0}&doc_type=webapp',
+        'category_website': baseSearch + '&cat={0}&doc_type=website',
         // consumer_info should be cached by the browser, never served by the
         // CDN, we can keep the Vary header.
         'consumer_info': '/api/v2/fireplace/consumer-info/?cache=1',
@@ -65,8 +70,6 @@ define('routes',
         'feed-collection': '/api/v2/fireplace/feed/collections/{0}/?cache=1&vary=0',
         'feed-shelf': '/api/v2/fireplace/feed/shelves/{0}/?cache=1&vary=0',
         'feedback': '/api/v2/account/feedback/',
-        'games-daily': '/api/v2/games/daily/?cache=1&vary=0',
-        'games-listing': search,
         'installed': '/api/v2/account/installed/mine/',
         'langpacks': '/api/v2/langpacks/?cache=1&vary=0',
         'late-customization': '/api/v2/late-customization/?cache=1',

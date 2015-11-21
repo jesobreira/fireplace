@@ -1,12 +1,10 @@
 define('views/homepage',
     ['core/capabilities', 'core/format', 'core/l10n', 'core/log',
      'core/nunjucks', 'core/requests', 'core/settings', 'core/z',
-     'desktop_promo', 'jquery', 'mkt-carousel', 'salvattore', 'core/urls',
-     'core/utils', 'utils_local', 'views/games/index'],
+     'jquery', 'salvattore', 'core/urls', 'core/utils', 'utils_local'],
     function(capabilities, format, l10n, log,
              nunjucks, requests, settings, z,
-             desktopPromo, $, mktCarousel, salvattore, urls,
-             utils, utils_local, gamesView) {
+             $, salvattore, urls, utils, utils_local) {
     'use strict';
     var logger = log('homepage');
     var gettext = l10n.gettext;
@@ -50,13 +48,6 @@ define('views/homepage',
     });
 
     return function(builder, args, params) {
-        if (capabilities.os.type === 'desktop' &&
-            settings.gametimeEnabled) {
-            return gamesView(builder, args, params);
-        }
-
-        var isDesktop = desktopPromo.isDesktop();
-
         params = params || {};
 
         builder.z('title', '');
@@ -66,14 +57,7 @@ define('views/homepage',
             delete params.src;
         }
 
-        builder.start('homepage.html', {
-            showPromo: isDesktop,
-            promoItems: desktopPromo.promoItems
-        });
-
-        if (isDesktop) {
-            mktCarousel.initialize();
-        }
+        builder.start('homepage.html');
 
         builder.onload('feed-items', function(data) {
             utils_local.initSalvattore(document.querySelector('.feed-home'));

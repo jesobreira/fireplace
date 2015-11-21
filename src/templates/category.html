@@ -1,23 +1,29 @@
 {% include '_macros/app_tile.html' %}
 {% include '_macros/more_button.html' %}
-
+{% include '_macros/sort_toggle.html' %}
 
 <section class="main">
-  <div class="subheader cat-header">
+  <div class="subheader cat-header desktop-cat-header">
     <h1 class="category-header-icon cat-{{ category }} cat-icon">
       {{ category_name }}
-      <a class="app-list-filters-expand-toggle" title="{{ _('Expand') }}"></a>
+      {% if not isWebsiteCategories %}
+        <a class="app-list-filters-expand-toggle" title="{{ _('Expand') }}"></a>
+      {% endif %}
     </h1>
-    {% if showPersonalizationSubmenu %}
-      {% include '_includes/personalization.html' %}
+    <div class="sort-toggle-container">
+      {{ category_sort_toggle(popularUrl, newUrl) }}
+    </div>
+  </div>
+  <div class="subheader sort-toggle-container mobile-cat-header">
+    {{ category_sort_toggle(popularUrl, newUrl) }}
+    {% if not isWebsiteCategories %}
+      <a class="app-list-filters-expand-toggle" title="{{ _('Expand') }}"></a>
     {% endif %}
   </div>
 </section>
 
 <section class="category app-list-page main full">
 {% defer (url=endpoint, pluck='objects', as=appOrWebsite, paginate='.app-list') %}
-  {% include "_includes/app_list_filters.html" %}
-
   <ul class="app-list {{ 'paginated' if response.meta.next }}">
     {% for app in this %}
       <li class="item result app-list-app">

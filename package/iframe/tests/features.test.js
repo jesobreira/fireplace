@@ -109,7 +109,7 @@ describe('features', function() {
 
         features.generateFeatureProfile([], navigator).then(function(profile) {
             // First 47 bits are currently hardcoded to true.
-            assert.equal(profile, '=//////9/.47.8');
+            assert.equal(profile, '=//////9/.47.9');
             done();
         });
     });
@@ -121,7 +121,7 @@ describe('features', function() {
 
         features.generateFeatureProfile(values, navigator).then(function(profile) {
             // First 47 bits are currently hardcoded to true.
-            assert.equal(profile, '=////////Hw==.53.8');
+            assert.equal(profile, '=////////Hw==.53.9');
             done();
         });
     });
@@ -133,11 +133,50 @@ describe('features', function() {
 
         features.generateFeatureProfile(values, navigator).then(function(profile) {
             // First 47 bits are currently hardcoded to true.
-            assert.equal(profile, '=//////9/AA==.53.8');
+            assert.equal(profile, '=//////9/AA==.53.9');
             done();
         });
     });
 
+    it('checkForExtraFeatures works', function(done) {
+        var features = proxyquire('../js/features', {});
+        var navigator = new MockNavigator();
+        navigator.hasFeature = function(name) {
+            return new Promise(function(resolve, reject) {
+                // arbitrarily resolve web-extensions feature to true,
+                // others to false.
+                resolve(name === 'web-extensions' ? true : false);
+            });
+        };
+        features.checkForExtraFeatures(navigator).then(function(features) {
+            assert.deepEqual(features, {addonsEnabled: true, homescreensEnabled: false, lateCustomizationEnabled: false});
+            done();
+        });
+    });
+
+    it('checkForExtraFeatures with all features enabled works', function(done) {
+        var features = proxyquire('../js/features', {});
+        var navigator = new MockNavigator();
+        navigator.hasFeature = function(name) {
+            return new Promise(function(resolve, reject) {
+                resolve(true);
+            });
+        };
+        features.checkForExtraFeatures(navigator).then(function(features) {
+            assert.deepEqual(features, {addonsEnabled: true, homescreensEnabled: true, lateCustomizationEnabled: true});
+            done();
+        });
+    });
+
+    it('checkForExtraFeatures returns empty object without hasFeature()', function(done) {
+        var features = proxyquire('../js/features', {});
+        var navigator = new MockNavigator();
+        navigator.hasFeature = undefined;
+        features.checkForExtraFeatures(navigator).then(function(features) {
+            assert.deepEqual(features, {});
+            done();
+        });
+    });
 });
 
 describe('features bitfield', function() {

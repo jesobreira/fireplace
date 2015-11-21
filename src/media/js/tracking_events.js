@@ -115,10 +115,10 @@
    Passed with events.
 */
 define('tracking_events',
-    ['compat_filter', 'consumer_info', 'core/capabilities', 'core/log',
+    ['apps', 'compat_filter', 'consumer_info', 'core/capabilities', 'core/log',
      'core/navigation', 'core/settings', 'core/user', 'core/utils', 'core/z',
      'jquery', 'tracking', 'user_helpers'],
-    function(compatFilter, consumerInfo, caps, log,
+    function(apps, compatFilter, consumerInfo, caps, log,
              navigation, settings, user, utils, z,
              $, tracking, userHelpers) {
     'use strict';
@@ -154,7 +154,10 @@ define('tracking_events',
         categoryPopular: '{0}-popular',
         detail: 'detail',
         new: 'new',
+        newWebsites: 'new-websites',
         popular: 'popular',
+        popularHomescreens: 'popular-homescreens',
+        popularWebsites: 'popular-websites',
         purchases: 'myapps',
         recommended: 'reco',
         search: 'search',
@@ -163,14 +166,13 @@ define('tracking_events',
         brand: 'branded-editorial-element',
         collection: 'collection-element',
         shelf: 'operator-shelf-element',
-        desktopPromo: 'desktop-promo',
     };
 
     // Srcs that should be persistent all the way through to the app detail
     // page. This handles cases like Desktop Promo -> Collection -> App where
-    // Desktop Promo should receive attribution.
+    // Desktop Promo should receive attribution. No longer used due to desktop
+    // promo removal.
     var PERSISTENT_SRCS = {};
-    PERSISTENT_SRCS[SRCS.desktopPromo] = true;
 
     // Track logged in.
     setSessionVar(DIMENSIONS.isLoggedIn, user.logged_in());
@@ -276,17 +278,6 @@ define('tracking_events',
             'click',
             filterDevice
         );
-    })
-
-    // Change content filtering options.
-    .on('change', '.content-filter', function() {
-        var filterContent = this.value;
-        setSessionVar(DIMENSIONS.contentType, filterContent);
-        sendEvent(
-            'Change content filter',
-            'click',
-            filterContent
-        );
     });
 
     // Navigate from collection tile to collection detail.
@@ -369,15 +360,6 @@ define('tracking_events',
         );
     })
 
-    // Desktop promo click.
-    .on('click', '.desktop-promo-item', function() {
-        sendEvent(
-            'View Desktop Promo Item',
-            'click',
-            this.getAttribute('data-tracking')
-        );
-    })
-
     .on('click', '[data-content-type="website"] + .mkt-app-button, .mkt-website-link', function() {
         var root = this;
         sendEvent(
@@ -398,7 +380,7 @@ define('tracking_events',
         // dimensions set.
         opts = opts || {};
         var custom = {};
-        var item = $installBtn.data('product');
+        var item = apps.transform($installBtn.data('product'));
 
         custom[DIMENSIONS.appName] = item.name;
         custom[DIMENSIONS.appId] = item.id + '';
@@ -410,6 +392,12 @@ define('tracking_events',
             custom[DIMENSIONS.appPremiumType] = item.payment_required ?
                                                 'paid' : 'free';
             custom[DIMENSIONS.contentType] = 'webapp';
+        }
+
+        if (item.isAddon) {
+            custom[DIMENSIONS.contentType] = 'addon';
+        } else if (item.doc_type === 'homescreen') {
+            custom[DIMENSIONS.contentType] = 'homescreen';
         }
 
         if ($('[data-page-type~="detail"]').length) {

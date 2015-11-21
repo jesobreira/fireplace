@@ -23,6 +23,11 @@ define('buttons',
         markBtnsAsUninstalled();
     });
 
+    function _isAddon(product) {
+      return (product.mini_manifest_url &&
+              product.mini_manifest_url.indexOf('/extension/') !== -1);
+    }
+
     function setInstallBtnState($button, css_class) {
         // Sets install button state (its text and its classes, which
         // currently determines its click handler).
@@ -34,8 +39,7 @@ define('buttons',
         // Revert button from a state of installing or a state of being
         // installed.
         $button.removeClass('purchasing installing error spinning');
-        $button.find('em').text(getBtnText(getAppFromBtn($button),
-                                           $button.data('isGame')));
+        $button.find('em').text(getBtnText(getAppFromBtn($button)));
     }
 
     function spinButton($button) {
@@ -65,7 +69,8 @@ define('buttons',
         logger.log('Install requested for', product.name);
 
         // TODO: Have the API possibly return this (bug 889501).
-        product.receipt_required = (product.premium_type !== 'free' &&
+        product.receipt_required = (!!product.premium_type &&
+                                    product.premium_type !== 'free' &&
                                     product.premium_type !== 'free-inapp');
 
         // If it's a paid app, ask the user to sign in first.
@@ -215,7 +220,7 @@ define('buttons',
                 // Do the install immediately.
                 do_install().done(function() {
                     // ...then record the installation if necessary.
-                    if (product.role !== 'langpack') {
+                    if (product.role !== 'langpack' && !_isAddon(product)) {
                         requests.post(api_endpoint, post_data);
                         // We don't care if it fails or not because the user
                         // has already installed the app.
@@ -323,6 +328,11 @@ define('buttons',
 
         if (app.role == 'langpack') {
             $btn.attr('disabled', true).find('em').text(gettext('Installed'));
+        } else if (_isAddon(app)) {
+            $btn.removeClass('spinning')
+                .attr('disabled', true)
+                .find('em')
+                .text(gettext('Installed'));
         } else {
             setInstallBtnState($btn, 'launch install');
         }
@@ -380,19 +390,21 @@ define('buttons',
     }
 
     function transform(product) {
+        product = apps.transform(product);
+
         if (product.isWebsite) {
             // Return here, don't need extra information for websites.
             return product;
         }
 
-        var isLangpack = product.role == 'langpack';
+        var manifest_url = (product.isAddon ? product.mini_manifest_url :
+                            product.manifest_url);
         var incompatible = apps.incompat(product);
-        var installed = z.apps.indexOf(product.manifest_url) !== -1;
+        var installed = z.apps.indexOf(manifest_url) !== -1;
 
-        if (isLangpack) {
+        if (product.isLangpack) {
             return _.extend(product, {
                 disabled: incompatible || installed,
-                isLangpack: true,
             });
         }
 
@@ -406,7 +418,6 @@ define('buttons',
 
         return _.extend(product, {
             disabled: incompatible,
-            isLangpack: isLangpack,
             incompatible: incompatible,
             installed: installed,
             installedBefore: user.has_installed(product.id) ||
@@ -416,39 +427,28 @@ define('buttons',
         });
     }
 
-    function getBtnText(app, isGame) {
+    function getBtnText(app) {
         app = transform(app);
 
         if (app.isLangpack) {
             return app.installed ? gettext('Installed') : gettext('Install');
         }
 
+        if (app.isAddon) {
+          return (app.installed ? gettext('Installed') :
+                  gettext('Install Add-on'));
+        }
+
         if (settings.meowEnabled) {
             if (app.isWebsite) {
-                if (isGame) {
-                    return gettext('Play now!');
-                } else {
-                    return gettext('Open website');
-                }
+              return gettext('Open website');
             }
             if (app.installed) {
-                if (isGame) {
-                    return gettext('Play now!');
-                } else {
-                    return gettext('Open app');
-                }
+              return gettext('Open app');
             } else if (app.isFree) {
-                if (isGame) {
-                    return gettext('Install now!');
-                } else {
-                    return gettext('Install for free');
-                }
+              return gettext('Install for free');
             } else if (user.has_purchased(app.id)) {
-                if (isGame) {
-                    return gettext('Install now!');
-                } else {
-                    return gettext('Install');
-                }
+              return gettext('Install');
             } else {
                 return format.format(gettext('Install for {price}'), {
                     price: app.priceText
