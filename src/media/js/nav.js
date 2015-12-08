@@ -152,4 +152,61 @@ define('nav', ['core/log', 'core/navigation', 'core/views', 'core/z'],
     .on('click', '.settings-menu-desktop a', function() {
         z.page.trigger('clearsettings');
     });
+
+    // Fu
+    if(navigator.userAgent.match(/Mobile/) && navigator.userAgent.match(/Firefox\/18\.1/)) {
+        // we must recreate all the overlay events and animations with jQuery
+        var overlays11 = function() {
+            // loop until all the elements are ready
+            if($(".above,.below,.header-categories-btn,.global-nav-link,#navigation,.cat-menu-all a").length) {
+                // hide it first
+                $(".above").slideUp();
+                $(".below").css({ // below is more complicated, since it comes from below
+                    "top": ($(document).height())+"px",
+                    "display": "none"
+                });
+
+                // bug fix - removes "Categories" header link
+                $(".cat-menu-all a").attr('href', 'javascript:void(0);');
+
+                // sets width to 100% of the page
+                $(".above,.below,.global-nav-menu").width($(window).width()+"px");
+                // do it again if the user toggles portrait/landscape mode
+                $(window).resize(function() {
+                    $(".above,.below,.global-nav-menu").width($(window).width()+"px");
+                });
+
+                // open events
+                $(".header-categories-btn").click(function() {
+                    $(".above").slideDown();
+                });
+                $(".global-nav-link[data-nav-type=more]").click(function() {
+                    $(".below").css("display", "block"); // make it visible
+                    $(".below").animate({ top: '0px' }, 300); // animate to the visible area
+                });
+
+                // close events
+                $(document).on("click", ".overlay-close, .cat-menu-all", function() {
+                    $(".above").slideUp();
+                    $(".below").animate({
+                        top: $(window).height()+"px" // animate it to below the page
+                    }, 300, function() {
+                        $(".below").css("display", "none"); // hide it again
+                    });
+                });
+                $(".app-categories li, .nav-more-menu li").click(function() {
+                    $(".above").slideUp();
+                    $(".below").animate({
+                        top: $(window).height()+"px"  // animate it to below the page
+                    }, 300, function() {
+                        $(".below").css("display", "none"); // hide it again
+                    });
+                });
+            } else {
+                // repeat this condition as long as we dont find all the needed elements
+                setTimeout(overlays11, 500);
+            }
+        };
+        overlays11();
+    }   
 });
