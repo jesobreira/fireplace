@@ -153,7 +153,7 @@ define('nav', ['core/log', 'core/navigation', 'core/views', 'core/z'],
         z.page.trigger('clearsettings');
     });
 
-    // Fu
+    // Firefox OS 1.1 compatibility 
     if(navigator.userAgent.match(/Mobile/) && navigator.userAgent.match(/Firefox\/18\.1/)) {
         // we must recreate all the overlay events and animations with jQuery
         var overlays11 = function() {
